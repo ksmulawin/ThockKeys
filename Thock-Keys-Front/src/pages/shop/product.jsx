@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { addToCart } from "../../reducers/CartReducers";
+import { computeCartItems } from "../../helpers/shopComputation";
 
 export const Product = (props) => {
   const { id, productName, price, productImage,stock } = props.data;
@@ -28,8 +29,7 @@ export const Product = (props) => {
                 onClick={
                   () => dispatch(addToCart({
                                               id : id,
-                                              productName: productName,
-                                              price: price,
+                                              base_price: price,
                                               itemToCartQuantity : itemQuantity
                                             })
                                           )

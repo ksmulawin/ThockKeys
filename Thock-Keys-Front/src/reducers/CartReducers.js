@@ -7,8 +7,12 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.value[action.payload.id] = action.payload;
     },
+    updateCart : (state,action) => {
+      console.log(action.payload)
+      state.value[action.payload.id] = action.payload;
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart,updateCart } = cartSlice.actions;
 export default cartSlice.reducer;

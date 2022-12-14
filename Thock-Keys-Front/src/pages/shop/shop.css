@@ -2,28 +2,55 @@
   margin-top: 100px;
   text-align: center;
   font-size: 40px;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .1em solid rgb(255, 255, 255); /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
+}
+
+.shop {
+  padding-left: 120px;
+  padding-right: 120px;
 }
 .products {
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
   place-items: center;
 }
 
 .product {
-  border-radius: 15px;
+  border-radius: 10px;
   width: 300px;
-  height: 350px;
-  margin: 100px;
+  margin: 40px 60px;
+  padding:20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border:1px solid #eee;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.1s ease-in-out;
 }
 
 .product img {
-  width: 400px;
+  width: 100%;
 }
 
 .product .description {
@@ -33,11 +60,19 @@
 .product:hover {
   transition: 0.3s ease-in;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+}
+
+.product input {
+  border: 1px solid #eee;
+  padding: 4px;
+  border-radius: 4px;
 }
 
 .addToCartBttn {
   background-color: transparent;
-  border: 2px solid rgb(19, 19, 19);
+  border: 2px solid orangered;
+  color:orangered;
   min-width: 100px;
   padding-left: 10px;
   padding-right: 10px;
@@ -47,7 +82,10 @@
 }
 
 .addToCartBttn:hover {
-  background-color: rgb(19, 19, 19);
+  border: 2px solid rgb(255, 38, 0);
+  background-color: orangered;
   color: white;
   cursor: pointer;
 }
+
+

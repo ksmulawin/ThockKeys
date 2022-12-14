@@ -1,46 +1,41 @@
 import React, { useContext } from "react";
-import { ShopContext } from "../../context/shop-context";
-import { PRODUCTS } from "../../products";
+import { useSelector } from "react-redux";
+import { useNavigate  } from "react-router-dom";
 import { CartItem } from "./cart-item";
-import { useNavigate } from "react-router-dom";
-
 import "./cart.css";
+import { computeCartTotal } from "../../helpers/shopComputation";
+
 export const Cart = () => {
-  const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
-  const totalAmount = getTotalCartAmount();
-
-  const navigate = useNavigate();
-
+  const cartItems = useSelector((state) => state.cartItems.value);
+  const productList = useSelector((state) => state.products.value);
+  let navigate = useNavigate();
   return (
     <div className="cart">
       <div>
         <h1>Your Cart Items</h1>
       </div>
       <div className="cart">
-        {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
+        {productList.map((product) => {
+          if (typeof cartItems[product.id] !== "undefined") {
+            return <CartItem data={product} cart={cartItems[product.id]} />;
           }
         })}
       </div>
 
-      {totalAmount > 0 ? (
+     
         <div className="checkout">
-          <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Continue Shopping </button>
-          <button
-            onClick={() => {
-              checkout();
-              navigate("/checkout");
-            }}
-          >
+          <h4>
+              <span className="float-left">Sub-Total: </span>
+              <span className="float-right">${computeCartTotal(cartItems)}</span>
+              <div className="clearboth" />
+          </h4>
+          <button onClick={() => { navigate("/");}}> Continue Shopping </button>
+          <button className="checkout-btn">
             {" "}
             Checkout{" "}
           </button>
         </div>
-      ) : (
-        <h1> Your Shopping Cart is Empty</h1>
-      )}
+      
     </div>
   );
 };

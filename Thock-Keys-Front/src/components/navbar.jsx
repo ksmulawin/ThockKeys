@@ -11,11 +11,16 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="links">
         <Link to="/" id="siteBrand">  {layout.navigation.siteBrand} </Link>
-        <Link to="/cart" id="cart">
+        <Link to="/cart" id="cart" onClick={(e) => {
+          if(noOfCartItems === 0) {
+            e.preventDefault();
+          }
+        }}>
           <ShoppingCart size={20} />{noOfCartItems > 0 ? "("+noOfCartItems+")" : ""}
         </Link>
-        <Link to="/contact"> Contact </Link>
-        <Link to="/"> Shop </Link>
+        <Link to="/contact"> <button className="primary-button">Create Account </button></Link>
+        <Link to="/contact"  className="hover-underline-animation"> Login </Link>
+        <Link to="/" className="hover-underline-animation"> Shop </Link>
       </div>
     </div>
   );
